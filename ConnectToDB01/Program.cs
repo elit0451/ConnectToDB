@@ -18,7 +18,6 @@ namespace ConnectToDB01
 
         private void Run()
         {
-
             bool running = true;
             try
             {
@@ -28,13 +27,8 @@ namespace ConnectToDB01
                     switch (input)
                     {
                         case 1: InsertCustomer(); break;
-                        //case 2: InsertPet(); break;
-                        //case 3: InsertBreed(); break;
-                        case 4: GetAllCustomers(); break;
-                        //case 5: GetAllPets(); break;
-                        //case 6: GetAllBreeds(); break;
+                        case 2: GetAllCustomers(); break;
                         case 7: SearchByLastName(); break;
-                        //case 8: SearchByEmailFirstName(); break;
                         case 9: Customers(); break;
                         case 10: running = false; break;
                     }
@@ -46,19 +40,21 @@ namespace ConnectToDB01
                 Console.WriteLine("UPS " + e.Message);
                 Console.ReadKey();
             }
-
         }
 
         private int Menu()
         {
-
-            Console.WriteLine("Commands:\n1) Insert new customer\n" + "4) Get all customers\n5) Search customers by phone number\n" +
-                                            "10) End program\n");
-            Console.WriteLine("Please input your command");
+            Console.WriteLine("Commands:");
+            Console.WriteLine("1) Insert new customer");
+            Console.WriteLine("2) Get all customers");
+            Console.WriteLine("5) Search customers by phone number");
+            Console.WriteLine("10) End program");
+            Console.WriteLine();
+            Console.WriteLine("Please input your command:");
             string input = Console.ReadLine();
             Console.Clear();
-            int x = Convert.ToInt32(input);
-            return x;
+            int inputNum = Convert.ToInt32(input);
+            return inputNum;
         }
 
         private void Customers()
@@ -88,7 +84,7 @@ namespace ConnectToDB01
                 }
             }
         }
-        
+
         private void GetAllCustomers()
         {
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -107,8 +103,7 @@ namespace ConnectToDB01
                         string CustomerLastName = reader["LastName"].ToString();
                         string CustomerFirstName = reader["FirstName"].ToString();
                         string CustomerPhoneNumber = reader["Phone"].ToString();
-                        //Console.WriteLine(/*id + " " + */ CustomerLastName + " " + CustomerFirstName + " " + CustomerPhoneNumber);
-
+                        
                         Console.WriteLine("First name -" + " " + CustomerFirstName);
                         Console.WriteLine("Last name -" + " " + CustomerLastName);
                         Console.WriteLine("Telephone number -" + " " + CustomerPhoneNumber);
@@ -119,8 +114,8 @@ namespace ConnectToDB01
             }
         }
 
-       
-       
+
+
         private void SearchByLastName()
         {
             using (SqlConnection con = new SqlConnection(connectionString))
